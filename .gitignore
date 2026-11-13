@@ -1,6 +1,17 @@
+
+# Local backend artifacts
+backend/.venv/
+backend/var/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+*.sqlite*
+backend/var-backup-*/
 node_modules/
 dist/
-work/
 *.tsbuildinfo
-.env*
-.openai/*.local.*
+
+# NASA source DEM exceeds GitHub standard file size; crop remains available
+data/source/LDEM_80S_80MPP_ADJ.TIF
+.DS_Store

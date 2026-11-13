@@ -7,23 +7,12 @@ import { Logo } from "./components/ui/Logo";
 import { useReducedMotion } from "./hooks/useReducedMotion";
 import { defaultMedia } from "./config/scenes";
 import type { MediaConfig } from "./config/scenes";
-import { configFromFiles, releaseMedia, restoreMedia } from "./lib/mediaStore";
+import { releaseMedia } from "./lib/mediaStore";
 import { navigate } from "./config/navigation";
 export default function App() {
   const [media, setMedia] = useState<MediaConfig>(defaultMedia);
   const [settings, setSettings] = useState(false);
   const reduced = useReducedMotion();
-  useEffect(() => {
-    let active = true;
-    restoreMedia()
-      .then((value) => {
-        if (active && value) setMedia(configFromFiles(value));
-      })
-      .catch(() => {});
-    return () => {
-      active = false;
-    };
-  }, []);
   useEffect(() => () => releaseMedia(media), [media]);
   return (
     <>

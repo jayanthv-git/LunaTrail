@@ -2,7 +2,7 @@ export const scenes = [
   {
     id: "earthIntro",
     start: 0,
-    end: 0.13,
+    end: 0.1,
     name: "Earth orbit",
     image: "/media/01-earth.png",
     eyebrow: "01 / THE POINT OF DEPARTURE",
@@ -13,8 +13,8 @@ export const scenes = [
   },
   {
     id: "earthDeparture",
-    start: 0.13,
-    end: 0.28,
+    start: 0.1,
+    end: 0.25,
     name: "Departure",
     image: "/media/02-sunrise.png",
     eyebrow: "02 / BEYOND THE FAMILIAR",
@@ -25,8 +25,8 @@ export const scenes = [
   },
   {
     id: "translunarJourney",
-    start: 0.28,
-    end: 0.42,
+    start: 0.25,
+    end: 0.4,
     name: "Translunar coast",
     image: "/media/03-translunar.png",
     eyebrow: "03 / TRANSLUNAR COAST",
@@ -37,8 +37,8 @@ export const scenes = [
   },
   {
     id: "moonApproach",
-    start: 0.42,
-    end: 0.56,
+    start: 0.4,
+    end: 0.54,
     name: "Lunar approach",
     image: "/media/04-approach.png",
     eyebrow: "04 / LUNAR APPROACH",
@@ -49,8 +49,8 @@ export const scenes = [
   },
   {
     id: "lunarDescent",
-    start: 0.56,
-    end: 0.7,
+    start: 0.54,
+    end: 0.65,
     name: "Lunar descent",
     image: "/media/05-orbit.png",
     eyebrow: "05 / A NEW FRAME OF REFERENCE",
@@ -61,8 +61,8 @@ export const scenes = [
   },
   {
     id: "terrainIntelligence",
-    start: 0.7,
-    end: 0.82,
+    start: 0.65,
+    end: 0.74,
     name: "Terrain intelligence",
     image: "/media/06-terrain.png",
     eyebrow: "06 / TERRAIN INTELLIGENCE",
@@ -73,8 +73,8 @@ export const scenes = [
   },
   {
     id: "roverNavigation",
-    start: 0.82,
-    end: 0.92,
+    start: 0.74,
+    end: 0.89,
     name: "Surface navigation",
     image: "/media/07-rover.png",
     eyebrow: "07 / SURFACE NAVIGATION",
@@ -85,7 +85,7 @@ export const scenes = [
   },
   {
     id: "lunatrailReveal",
-    start: 0.92,
+    start: 0.89,
     end: 1,
     name: "LunaTrail",
     image: "/media/08-hero.png",
@@ -136,11 +136,14 @@ export function sceneOpacity(p: number, index: number) {
 export type MediaConfig =
   | { mode: "storyboard"; sources: string[]; heroHasText: boolean }
   | { mode: "image-sequence"; sources: string[]; heroHasText: boolean }
-  | { mode: "video"; src: string; poster?: string; heroHasText: boolean };
+  | { mode: "video"; src: string; mobileSrc?: string; poster?: string; staticFrames?: string[]; heroHasText: boolean };
 // Original PNG artwork from photos.zip, preserved without alteration.
 export const storyboardSources = scenes.map((s) => s.image);
 export const defaultMedia: MediaConfig = {
-  mode: "storyboard",
-  sources: storyboardSources,
-  heroHasText: true,
+  mode: "video",
+  src: "/media/journey-desktop.mp4",
+  mobileSrc: "/media/journey-mobile.mp4",
+  poster: "/media/video-still-01.jpg",
+  staticFrames: Array.from({length:8},(_,i)=>`/media/video-still-${String(i+1).padStart(2,"0")}.jpg`),
+  heroHasText: false,
 };

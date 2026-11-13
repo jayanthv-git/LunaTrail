@@ -4,9 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
-    "test": "node --experimental-strip-types --test tests/*.test.ts"
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "dev:all": "python3 scripts/dev.py",
+    "setup": "sh scripts/setup.sh",
+    "prepare:terrain": "PYTHONPATH=backend backend/.venv/bin/python -m app.cli prepare",
+    "test:backend": "PYTHONPATH=backend backend/.venv/bin/python -m pytest backend/tests -q",
+    "benchmark": "PYTHONPATH=backend backend/.venv/bin/python -m app.cli benchmark"
   },
   "dependencies": {
     "react": "^19.1.0",

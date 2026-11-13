@@ -1787,3 +1787,10 @@ footer {
   .baked-copy .hero-down svg { visibility:hidden; }
   .baked-copy .hero-down:hover, .baked-copy .hero-down:focus-visible { background:#ffffff08;border-radius:50%; }
 }
+
+/* Local DEM experiment controls */
+.dashboard input, .dashboard select { background:#10171d; color:#dce6ee; border:1px solid #2b3943; border-radius:4px; padding:7px; max-width:130px; font:inherit; }
+.dashboard .system-toolbar label { display:flex; align-items:center; gap:8px; font-size:12px; }
+.dashboard .system-toolbar button { padding:8px 10px; }
+.dashboard .evaluation > p, .dashboard .evaluation > a { margin-left:24px; margin-right:24px; }
+.dashboard button:disabled { opacity:.4; cursor:not-allowed; }

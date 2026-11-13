@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CinematicMedia } from "./CinematicMedia";
 import type { MediaHandle } from "./CinematicMedia";
 import { SceneOverlay } from "./SceneOverlay";
@@ -10,6 +10,7 @@ import { useScrollTimeline } from "../../hooks/useScrollTimeline";
 import { scenes, motion } from "../../config/scenes";
 import type { CSSProperties } from "react";
 import type { MediaConfig } from "../../config/scenes";
+import {useVideoPreloader} from "../../hooks/useVideoPreloader";
 const noSources: string[] = [];
 export function CinematicExperience({
   config,
@@ -27,17 +28,20 @@ export function CinematicExperience({
     progress,
     ready: imagesReady,
   } = useMediaPreloader(config.mode === "video" ? noSources : config.sources);
+  const [mobile] = useState(()=>window.matchMedia('(max-width: 760px)').matches);
+  const preload=useVideoPreloader(config.mode==='video'&&!reduced?(mobile&&config.mobileSrc?config.mobileSrc:config.src):undefined);
+  const playbackConfig=useMemo(()=>config.mode==='video'?{...config,src:preload.url||''}:config,[config,preload.url]);
   const [videoReady, setVideoReady] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
   const ready =
     config.mode === "video"
-      ? reduced || videoReady || videoFailed
+      ? reduced || videoReady || videoFailed || preload.error
       : imagesReady;
   const available =
     config.mode === "video"
       ? reduced
         ? Boolean(config.poster)
-        : !videoFailed
+        : !videoFailed && !preload.error
       : images.some(Boolean);
   const draw = useCallback((p: number) => media.current?.draw(p), []);
   useScrollTimeline(root, ready, reduced, draw);
@@ -50,10 +54,10 @@ export function CinematicExperience({
     };
   }, [ready]);
   useEffect(() => {
-    if (config.mode !== "video" || videoReady || reduced) return;
+    if (config.mode !== "video" || videoReady || reduced || !preload.url) return;
     const timer = setTimeout(() => setVideoFailed(true), 20000);
     return () => clearTimeout(timer);
-  }, [config, videoReady, reduced]);
+  }, [config, videoReady, reduced, preload.url]);
   const baked =
     config.heroHasText &&
     (config.mode === "video" ? available : Boolean(images[images.length - 1]));
@@ -66,12 +70,12 @@ export function CinematicExperience({
           )
         ]?.src
       : config.mode === "video"
-        ? config.poster
+        ? config.staticFrames?.[index] || config.poster
         : images[index]?.src;
   return (
     <>
       <MissionLoader
-        progress={config.mode === "video" ? (ready ? 100 : 25) : progress}
+        progress={config.mode === "video" ? preload.progress : progress}
         ready={ready}
       />
       <section
@@ -88,10 +92,10 @@ export function CinematicExperience({
       >
         <div className="cinematic-viewport">
           <HeroNavigation />
-          {!reduced && (
+          {!reduced && (config.mode!=="video" || preload.url) && (
             <CinematicMedia
               ref={media}
-              config={config}
+              config={playbackConfig}
               images={images}
               onVideoReady={() => {
                 setVideoReady(true);

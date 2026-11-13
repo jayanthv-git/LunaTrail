@@ -1,66 +1,100 @@
-# LunaTrail
+# LunaTrail local DEM research demonstration
 
-React + Vite + TypeScript + Tailwind CSS + GSAP ScrollTrigger. Native scrolling drives one sticky, reversible eight-scene journey, followed by the technology story and interactive mission dashboard.
+A complete local FastAPI + SQLite backend connected to the existing React cinematic frontend. Real NASA LOLA terrain → rendered references → hidden held-out observation → position and heading estimate → explicit truth reveal → measured errors. This uses simulated observations from the same DEM, **not real camera photographs**.
 
 ## Start
 
+Tested on this Apple Silicon Mac with Python 3.14.6 (Rasterio 1.5.2 binary wheel), Node 24, and pinned Python dependencies. No Docker or cloud account needed.
+
 ```sh
-npm install
-npm run dev
-npm run build
+cd "/Users/jayanthv/Desktop/lunatrail 2"
+npm run setup
+npm run prepare:terrain
+npm run dev:all
+```
+
+Open http://127.0.0.1:5173/#system. API documentation: http://127.0.0.1:8000/docs. Both services bind to loopback. Ctrl+C stops both process groups; active background work is given 30 seconds to finish before termination. Do not run multiple backend workers against the same state directory. Vite proxies `/api` to port 8000; no broad CORS is enabled. `npm run dev` starts only the frontend.
+
+Setup and preparation are repeatable: migrations are applied and the same DEM/configuration reuses the existing dataset and index. `.env.example` documents optional settings; copy it to `.env` to customize. Environment paths resolve against the project root, including spaces.
+
+Click Build / reuse index → New hidden experiment → Run localization → Reveal ground truth → Evaluate 20 trials. Seed, heading mode and Gaussian angular noise are selectable. Changes apply to the **next** generated experiment or evaluation. Export links provide JSON and CSV. The imported/illustrative toggle retains the original JSON importer with its separate browser-only aligned-profile comparison and unverified provenance labels. Backend failures never select synthetic data.
+
+## Geometry and data
+
+The processed crop and source documentation are included. The original 180 MB source GeoTIFF remains in the local working folder and is omitted from GitHub because it exceeds GitHub’s standard 100 MB file limit. The backend starts and runs the default crop without that source file. To use full-source mode, supply the original file at `data/source/LDEM_80S_80MPP_ADJ.TIF` and set `LUNATRAIL_DEM` accordingly. Both raster headers are validated, including CRS, scale, offset, NoData, transform, bounds and resolution. The source is 7600×7600; the default crop is 256×256 with all 65,536 pixels valid. Pixel centers span −10,200 to +10,200 m; outer pixel edges are −10,240 to +10,240 m. Preview bounds use outer pixel edges for exact raster/overlay alignment.
+
+Computations use the embedded lunar south polar stereographic x/y meters. PyProj converts to the raster's own lunar geodetic CRS for display; there is no Earth EPSG conversion. Radius is 1,737,400 m from the CRS. Elevations are meters as specified by the saved NASA product documentation. The active raster is SHA-256 fingerprinted. A source file selected through `LUNATRAIL_DEM` is read as a central 256×256 window, avoiding a full-band allocation; this MVP intentionally keeps its search region bounded. Expanding or choosing another full-source region is not exposed in the UI.
+
+Default renderer:
+
+- Full circular 360-sample profile, 1° azimuth spacing. Azimuth is clockwise from **grid +Y**, not geographic north at each point. +X is 90°.
+- Observer is 1.5 m above bilinearly interpolated local ground. Bilinear samples require all four contributing cells to be finite. NoData never becomes zero elevation.
+- Ray samples are at 80, 160, …, 4000 m; zero distance is excluded. The maximum apparent elevation angle is retained, including negative angles.
+- For distance d and lunar radius R: horizontal = (R+terrain elevation) sin(d/R); vertical = (R+terrain elevation) cos(d/R) − (R+observer ground+height). Angle is atan2(vertical,horizontal) in degrees. No atmospheric refraction.
+- The spherical drop at 4 km is approximately 4.60 m (0.066°). Projected distance approximates local surface arc length; projection distortion near this polar crop is negligible relative to an 80 m pixel, but this is not an exact planetary ray tracer. Relief, finite radius, sampling, DEM uncertainty and omitted distant terrain remain limitations.
+- Viewpoints stay within [−6199,+6199] m on both axes, providing a 4 km complete horizon plus interpolation margin. Interior NoData causes rejection of the whole profile. Rays are never silently shortened.
+- Default grid: 640 m spacing, 400 candidates. Configurable index geometry has bounded radius, step, height, sample count and spacing; maximum 2000 candidates.
+
+Matching uses angular RMSE. Unknown heading searches all circular shifts efficiently via FFT correlation. Observation sample i corresponds to reference sample i+h; a positive h means clockwise heading. Aligned predictions use roll(reference, −h). Only full uniformly sampled circular server profiles support heading search. The imported workflow remains known-heading only. Score gaps are ambiguity indicators, not confidence probabilities.
+
+Seeded test viewpoints are continuously sampled within usable bounds and rejected if within 1 m of any reference. Unknown headings use integer sample shifts (1° default); known-heading observations use 0°. Noise is independent Gaussian angular noise with specified standard deviation. The matcher receives only public observed values, geometry, mode and index; it never receives private ground truth. Reveal requires a persisted completed match. Local position error is Euclidean distance in lunar projected meters. The nearest-grid distance is reported as a discretization baseline. Repeated localization/reveal reuses the same run; trials have unique evaluation/number keys.
+
+## Architecture and persistence
+
+`backend/app/` separates configuration, schemas, terrain, rendering, indexing, matching, experiments, evaluation, jobs, database and API routes. `backend/migrations/` contains the Alembic initial migration. `scripts/dev.py` supervises both local services. `src/lib/api.ts` is the typed frontend client. The existing cinematic media remains described in `docs/CINEMATIC.md`.
+
+SQLite tables:
+
+| Table | Purpose |
+| --- | --- |
+| datasets | SHA-256 identity, actual raster metadata, NASA provenance |
+| reference_indexes | Dataset FK, geometry, region, renderer signature, artifact checksum/shape, build metrics |
+| candidates | Index FK, projected/geographic position, NPZ row reference |
+| experiments | Index FK, public configuration, private true position/heading/seed, observation artifact |
+| localizations | Unique experiment FK, ranked scores/positions/headings, aligned-profile artifact |
+| evaluations / trials | Parameters, aggregate metrics, unique per-trial results and failure reasons |
+| jobs | Bounded worker status, progress, parameters and errors |
+
+Large profile arrays live in compressed NPZ files; SQLite holds small metadata and checksums. Artifact reads verify checksums, index identities include terrain/configuration/region, and file stat changes reload terrain. Corrupt/stale artifacts are rejected. One bounded worker handles index and evaluation jobs (at most three active/queued); database transactions are serialized in-process with an RLock and SQLite WAL. Restart explicitly marks unfinished jobs/evaluations interrupted. Failed trials remain in reports, and success rates include failures in the denominator. Job status is available at `/api/v1/jobs/{id}`.
+
+The local API is documented by OpenAPI: health/readiness; datasets/metadata/preview/usable bounds; index creation/summary; jobs; experiments/public observation; localization; explicit reveal; evaluations/results; JSON/CSV exports. Request bodies are limited to 64 KiB; schemas reject unknown fields, nonfinite values and out-of-range parameters. Browsers cannot submit filesystem paths. Raw DEM/NPZ upload and raw-camera extraction are outside this MVP.
+
+## Verify and benchmark
+
+```sh
 npm test
+npm run build
+npm run test:backend
+npm run benchmark
 ```
 
-## Original artwork
+The benchmark saves four groups of 20 trials (seed 20261113 through 20261132): clean/noisy × known/unknown heading. Reports are in `reports/benchmark.json`, `reports/index.json`, and four CSVs. Results are also persisted in SQLite. The same 20 held-out positions are paired across conditions, not 80 independent locations. Do not interpret these results as real-camera validation.
 
-The eight original PNGs from `photos.zip` are bundled in `public/media/` and load automatically for all visitors. They are byte-for-byte copies of the supplied files. No substitute artwork is used.
+Measured on this device:
 
-1. `01-earth.png` — dark Earth orbit
-2. `02-sunrise.png` — closer Earth sunrise
-3. `03-translunar.png` — Earth receding, Moon ahead
-4. `04-approach.png` — rapid Moon approach
-5. `05-orbit.png` — close lunar orbit
-6. `06-terrain.png` — terrain with topographic data
-7. `07-rover.png` — rover with navigation overlays
-8. `08-hero.png` — final LunaTrail composition
+| Heading / noise σ | Mean position | Median | P90 | Mean heading error | Mean matching time | Success ≤640 m |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Known / 0° | 337.4 m | 297.9 m | 530.1 m | 0° supplied | 0.49 ms | 95% |
+| Known / 0.1° | 337.4 m | 297.9 m | 530.1 m | 0° supplied | 0.48 ms | 95% |
+| Unknown / 0° | 418.9 m | 402.1 m | 617.9 m | 3.2° | 1.64 ms | 90% |
+| Unknown / 0.1° | 418.9 m | 402.1 m | 617.9 m | 3.2° | 1.34 ms | 90% |
 
-The existing contour and scanning graphics are retained without duplicate HUD layers. The final reference includes typography and a navbar inside the image. On desktop, the renderer crops away the baked navbar and fits the remaining composition beneath the working HTML navigation. Duplicate title/supporting copy remains available semantically but is visually hidden. On mobile, source windows from the original sky and rover/terrain are composed behind the responsive HTML title and supporting copy. These are runtime viewport crops; the original PNG is unchanged. The translunar image is fitted in portrait view to keep both Earth and Moon visible.
+All 80 trials completed, zero failures. Small added noise did not change winning candidates in this sample. Mean nearest-candidate baseline: 256.1 m. Index build: 0.488 s; compressed artifact: 1,105,694 bytes. Match time measures algorithm/ranking/alignment only, excluding HTTP, file validation and database I/O.
 
-Media settings still allow local storyboard, frame-sequence, or video overrides. These persist in IndexedDB only in that browser. Reset media restores the bundled originals. For a clean final render without baked text, set `heroHasText: false`. Truly independent rover/terrain parallax requires transparent separated layers, which were not supplied. The storyboard renderer uses camera transforms and cross-dissolves; it does not fabricate continuous in-between camera frames.
+Browser verification also ran the default seed 42 unknown-heading clean experiment: 719.0 m position error and 5° heading error, versus a 318.8 m nearest-grid baseline. A separate browser-driven batch at seeds 42–61 measured **741.1 m mean, 338.1 m median, 1164.4 m P90, 65% within 640 m**, zero failures. This worse sample illustrates ambiguity and seed sensitivity; it is included in `reports/browser-evaluation.json` and CSV rather than omitted. Visual inspection verified terrain overlays, ranked results, aligned curves, reveal and completed evaluation in the responsive dashboard.
 
-## Media modes
+## Troubleshooting and clearing generated state
 
-All timing lives in `src/config/scenes.ts`, including scene boundaries, blend intervals, text envelopes, final hold, scroll lengths, and easing parameters. The desktop journey is 960vh; mobile is 600vh.
+- Backend unavailable: run `npm run dev:all`, check port 8000 logs, then Retry connection. A frontend alone cannot run DEM experiments.
+- Port occupied: stop the earlier local service; launcher uses strict port 5173 so it does not silently move.
+- Python wheel installation: use this supported Python 3.14/macOS Apple Silicon environment and the pinned requirements; no source GDAL build is needed here.
+- Stale or corrupted cache: stop both services, move only generated state aside and prepare again. This resets experiments too. Preserve it if you need past results:
 
-```ts
-// Existing original storyboard paths:
-{ mode: 'storyboard', sources: storyboardSources, heroHasText: true }
-// Real sequential render frames, already ordered:
-{ mode: 'image-sequence', sources: ['/frames/0001.webp', '/frames/0002.webp'], heroHasText: false }
-// Seek-optimized, browser-compatible video:
-{ mode: 'video', src: '/media/journey.mp4', poster: '/media/01-earth.png', heroHasText: false }
+```sh
+cd "/Users/jayanthv/Desktop/lunatrail 2"
+mv backend/var "backend/var-backup-$(date +%Y%m%d-%H%M%S)"
+npm run prepare:terrain
+npm run dev:all
 ```
 
-Canvas frames use cover cropping and devicePixelRatio capped at 2. A frame key avoids redundant drawing. The storyboard transforms smoothly with scroll; rendered sequences select their frame directly. React does not receive per-frame state updates. Images preload before the scroll timeline becomes active. Use appropriately compressed, display-sized frames; a long full-resolution sequence can exceed browser memory. Local preview imports are limited to 350 MB. Prefer a compressed, densely keyframed MP4 for long sequences on memory-constrained devices.
-
-Video is paused and scroll-controlled. A GSAP ticker interpolates toward the target time, avoids seeking while a seek is outstanding, and cleans up when unmounted. Encode with short keyframe intervals (ideally all-intra for best seeking) and fast-start metadata. Actual seek performance depends on the supplied asset and device and is unverified without a video.
-
-Reduced-motion users receive static sequential articles. Canvas content is decorative; the story exists in semantic HTML. Navigation, chapters, map controls, candidate selection, import dialogs, and dashboard actions support keyboard use.
-
-## Dashboard and data contract
-
-The initial dataset is explicitly **synthetic illustration**, not NASA DEM data. It contains no lunar coordinates or ground truth. Run skyline match calculates actual RMSE and actual local processing duration for those synthetic arrays. Location/error metrics remain unavailable.
-
-Download `public/example-profiles.json` from the dashboard for the JSON structure. Replace the illustrative arrays with actual aligned profiles; optionally add `position: {lat, lon}` to each reference and `groundTruth: {lat, lon}` to the dataset. Samples are elevations in degrees at the corresponding increasing azimuth values in degrees. Coordinates use lunar latitude/longitude in degrees.
-
-The imported source string is author-provided and not independently verified. Import validation rejects nonfinite/mismatched data, invalid coordinates, duplicate reference IDs, more than 1000 references, more than 4096 samples, and files above 10 MB.
-
-The matching algorithm is aligned profile RMSE; it does not solve heading or camera calibration. The best reference's coordinates are the estimate. Ground truth is revealed separately. Evaluation uses a spherical Moon radius of 1,737,400 m; median and maximum include unique revealed datasets in the current session. Exports contain computed results and only revealed ground truth.
-
-No NASA DEM ingestion, image skyline extraction, scientific validation, or operational navigation backend is claimed. The map is a schematic coordinate plot with explicitly illustrative contour lines. Raw DEM raster rendering and test-viewpoint imagery require additional data/services.
-
-## Verification
-
-`npm test` verifies profile ranking, input rejection, lunar distance, synthetic-data labeling, timeline coverage, and reversible overlay values. `npm run build` performs strict TypeScript checking and the production build.
-
-Browser QA is not verified: the managed environment exposes no `cua_repl.js` browser-control tool. The Sites managed-preview instructions prohibit an alternate browser-control path in this state. Desktop/mobile/ultrawide visual inspection, actual media scrubbing, and frame-rate testing remain outstanding.
+If using a custom `LUNATRAIL_STATE`, move that directory instead. Never clear `data/source` or `data/processed`. Virtualenvs, runtime state and caches are ignored by Git; this folder currently has no Git repository.
