@@ -15,3 +15,7 @@ dist/
 # NASA source DEM exceeds GitHub standard file size; crop remains available
 data/source/LDEM_80S_80MPP_ADJ.TIF
 .DS_Store
+
+# Local scratch work and rendered review artifacts
+/work/
+/outputs/

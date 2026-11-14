@@ -23,6 +23,8 @@ export function useScrollTimeline(
     const render = () => {
       const p = clamp(state.p / (1 - motion.hold));
       draw(p);
+      const enter = el.querySelector<HTMLElement>(".enter-lunatrail");
+      if (enter) { const show=p>=.995; enter.classList.toggle("ready",show); enter.tabIndex=show?0:-1; enter.setAttribute("aria-hidden",String(!show)); }
       overlays.forEach((overlay, i) => {
         const opacity = sceneOpacity(p, i);
         overlay.style.opacity = String(opacity);

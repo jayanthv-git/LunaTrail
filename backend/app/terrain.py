@@ -12,10 +12,10 @@ def fingerprint(path):
 
 def metadata(path):
     with rasterio.open(path) as ds:
-        if ds.count != 1 or not ds.crs or ds.transform.b or ds.transform.d:
+        if ds.count != 1 or not ds.crs or ds.transform.b or ds.transform.d or ds.transform.a <= 0 or ds.transform.e >= 0 or min(ds.width,ds.height)<4:
             raise ValueError('A north-up, single-band projected lunar DEM is required')
         crs = CRS(ds.crs)
-        if not crs.is_projected or not 1700000 < crs.ellipsoid.semi_major_metre < 1800000:
+        if not crs.is_projected or not 1700000 < crs.ellipsoid.semi_major_metre < 1800000 or any(abs(a.unit_conversion_factor-1)>1e-9 for a in crs.axis_info):
             raise ValueError('Expected a lunar projected CRS')
         return dict(width=ds.width, height=ds.height, bounds=list(ds.bounds), resolution=list(ds.res),
                     crs=ds.crs.to_wkt(), transform=list(ds.transform), units='meters',
@@ -30,9 +30,10 @@ class Terrain:
             # Full source is supported without allocating its entire elevation band.
             w, h = min(ds.width, 256), min(ds.height, 256)
             window = Window((ds.width-w)//2, (ds.height-h)//2, w, h)
-            self.z = ds.read(1, window=window, masked=True).filled(np.nan).astype(float)*ds.scales[0]+ds.offsets[0]
+            self.z = ds.read(1, window=window, masked=True).astype(float).filled(np.nan)*ds.scales[0]+ds.offsets[0]
             self.transform = ds.window_transform(window)
             self.crs = CRS(ds.crs)
+        if not np.isfinite(self.z).any(): raise ValueError('DEM has no finite elevation values')
         self.radius = self.crs.ellipsoid.semi_major_metre
         self.geo = Transformer.from_crs(self.crs, self.crs.geodetic_crs, always_xy=True)
         self.h, self.w = self.z.shape
@@ -41,7 +42,7 @@ class Terrain:
         left,bottom = self.transform @ (0,self.h)
         right,top = self.transform @ (self.w,0)
         self.metadata.update(active_bounds=[left,bottom,right,top], sample_center_bounds=self.bounds, active_shape=list(self.z.shape),
-                             valid_pixels=int(np.isfinite(self.z).sum()), fingerprint=self.fingerprint)
+                             valid_pixels=int(np.isfinite(self.z).sum()), fingerprint=self.fingerprint, min_elevation=float(np.nanmin(self.z)), max_elevation=float(np.nanmax(self.z)), file_size=path.stat().st_size, format='GeoTIFF')
     def pixel_to_world(self, col, row):
         return self.transform @ (np.asarray(col)+.5, np.asarray(row)+.5)
     def world_to_pixel(self, x, y):

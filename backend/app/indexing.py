@@ -1,4 +1,12 @@
-import hashlib, json, time
+import hashlib, json, time, os, tempfile
+from threading import RLock
+from functools import wraps
+_build_lock=RLock()
+def serialized_build(fn):
+    @wraps(fn)
+    def wrapped(*args,**kwargs):
+        with _build_lock:return fn(*args,**kwargs)
+    return wrapped
 import numpy as np
 from functools import lru_cache
 from .config import settings
@@ -11,14 +19,15 @@ from .db import Dataset, ReferenceIndex, Candidate, session, get
 def _terrain(stamp): return Terrain(settings.dem)
 def terrain():
     stat=settings.dem.stat()
-    return _terrain((stat.st_mtime_ns,stat.st_size))
+    return _terrain((str(settings.dem),stat.st_mtime_ns,stat.st_size))
 
 def initialize():
     t=terrain()
     from .config import ROOT
     source=ROOT/'data/source/LDEM_80S_80MPP_ADJ.TIF'
-    details=dict(t.metadata, source_metadata=metadata(source) if source.exists() else None,source_url='https://pgda.gsfc.nasa.gov/products/90',
-                 description='NASA LOLA real terrain; shared-DEM simulated observations',active_file=settings.dem.name)
+    bundled=settings.dem.resolve() in {source.resolve(),(ROOT/'data/processed/LDEM_80S_80MPP_ADJ_crop_20480m.tif').resolve()}
+    details=dict(t.metadata, source_url='https://pgda.gsfc.nasa.gov/products/90' if bundled else None,
+                 description='NASA LOLA south-pole terrain' if bundled else 'User-imported lunar DEM · provenance unverified',active_file=settings.dem.name)
     with session() as s:
         record=s.get(Dataset,t.fingerprint)
         if record: record.details=details
@@ -31,7 +40,13 @@ def index_key(params):
 
 def artifact(name, **arrays):
     path=settings.state/f'{name}.npz'
-    np.savez_compressed(path,**arrays)
+    with tempfile.NamedTemporaryFile(dir=settings.state,suffix='.npz',delete=False) as temp:
+        temporary=temp.name
+    try:
+        np.savez_compressed(temporary,**arrays)
+        os.replace(temporary,path)
+    finally:
+        if os.path.exists(temporary):os.unlink(temporary)
     return dict(path=path.name,sha256=fingerprint(path),shapes={k:list(v.shape) for k,v in arrays.items()},bytes=path.stat().st_size)
 
 def load_artifact(info):
@@ -39,6 +54,7 @@ def load_artifact(info):
     if fingerprint(path)!=info['sha256']: raise ValueError('Artifact checksum mismatch; rebuild cache')
     with np.load(path,allow_pickle=False) as data: return {k:data[k] for k in data.files}
 
+@serialized_build
 def build(params: IndexInput, progress=lambda p:None):
     t=terrain(); key=index_key(params)
     with session() as s:
@@ -57,7 +73,7 @@ def build(params: IndexInput, progress=lambda p:None):
     if len(points)<2: raise ValueError('Insufficient valid candidates')
     info=artifact(key,points=np.asarray(points),profiles=np.asarray(profiles))
     details=dict(parameters=params.model_dump(),artifact=info,count=len(points),build_seconds=time.perf_counter()-started,
-                 usable_bounds=[a,b,c,d],fingerprint=t.fingerprint,status='ready')
+                 usable_bounds=[a,b,c,d],fingerprint=t.fingerprint,status='ready',generated_at=__import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat())
     with session() as s:
         s.add(ReferenceIndex(id=key,dataset_id=t.fingerprint,details=details)); s.flush()
         for i,(x,y) in enumerate(points):

@@ -1,11 +1,14 @@
-LUNATRAIL LOCAL DEM RESEARCH DEMO
+LunaTrail
 
-Requires Node.js 24 and Python 3.14 on Apple Silicon macOS.
+In the cloned LunaTrail project folder:
+1. npm run setup
+2. npm run prepare:terrain
+3. npm run dev:all
 
-1. Run: npm run setup
-2. Run: npm run prepare:terrain
-3. Run: npm run dev:all
-4. Open: http://127.0.0.1:5173/#system
+Open http://127.0.0.1:5173/ and scroll to ENTER LUNATRAIL.
+Dashboard: http://127.0.0.1:5173/dashboard
+API docs: http://127.0.0.1:8000/docs
 
-See README.md for tests, benchmark results, limitations, and API docs.
-The processed NASA DEM crop is included. The 180 MB original DEM is omitted from GitHub.
+Use .env.example for optional ports and paths.
+Read README.md and docs/HANDOVER.md for the demo and known limits.
+The bundled NASA DEM crop is ready to use; the 180 MB source is omitted.

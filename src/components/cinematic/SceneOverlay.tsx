@@ -1,6 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { scenes } from "../../config/scenes";
-import { navigate } from "../../config/navigation";
+import { Link } from "react-router";
 export function SceneOverlay({
   index,
   bakedHero = false,
@@ -64,13 +64,7 @@ export function SceneOverlay({
         </div>
       )}
       {index === 7 && (
-        <button
-          className="hero-down"
-          onClick={() => navigate("#technology")}
-          aria-label="Discover the technology"
-        >
-          <ArrowDown size={27} />
-        </button>
+        <Link className="enter-lunatrail" to="/dashboard">ENTER LUNATRAIL <span>→</span></Link>
       )}
     </div>
   );

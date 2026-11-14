@@ -1,0 +1,15 @@
+export type Position = {x:number;y:number;lat:number;lon:number};
+export type Geometry = {radius:number;step:number;samples:180|360|720;height:number;renderer:string};
+export type Preferences = {geometry:Geometry;spacing:number;algorithm:'normalized-correlation'|'angular-rmse';circular_alignment:boolean;top_k:number;coordinate_format:'geographic'|'projected';autosave:boolean;contours:boolean;hillshade:boolean;palette:'lunar'|'blue';quality:'native'|'half';test_count:number;seed:number;noise:number;success_threshold:number;cache_enabled:boolean;logging_level:'WARNING'|'INFO'|'DEBUG'};
+export type Dataset = {id:string;description:string;active_file:string;active_bounds:number[];resolution:number[];active_shape:number[];width:number;height:number;valid_pixels:number;min_elevation:number;max_elevation:number;file_size:number;format:string;crs:string;source_url:string|null};
+export type ReferenceIndex = {id:string;count:number;points:(Position&{id:string})[];build_seconds:number;generated_at?:string;parameters:{geometry:Geometry;spacing:number}};
+export type Observation = {id:string;observed:number[];geometry:Geometry;mode:string;noise:number|null;source?:'manual'};
+export type Candidate = {id:string;rank:number;position:Position;similarity:number;score:number;heading:number;values:number[];error_m:number|null};
+export type MatchResult = {test_id:string;algorithm:string;algorithm_version:string;candidates:Candidate[];processingMs:number;searched:number};
+export type Truth = {true_position:Position;predicted_position:Position;position_error_m:number;heading_error_deg:number;nearest_candidate_m:number};
+export type Test = {id:string;label:string};
+export type Trial = {test_id:string;label:string;seed:number;predicted?:Position;actual?:Position;error_m?:number;similarity?:number;processing_ms?:number;status:string;error?:string};
+export type Evaluation = {rows:Trial[];metrics:{count:number;failed:number;median:number|null;mean:number|null;maximum:number|null;success:number;threshold:number;success_rate:number;average_ms:number|null};settings:Preferences;dataset_id:string;algorithm_version:string;generated_at:string};
+export type Health = {overall:string;checked_at:string;api_connected:boolean;components:Record<string,{ready:boolean;detail:string;last_success?:string;last_duration_ms?:number;results_available?:boolean}>;activity:{time:string;message:string}[]};
+export type Mission = {dataset:Dataset;index:ReferenceIndex|null;tests:Test[];settings:Preferences;observation:Observation|null;result:MatchResult|null;truth:Truth|null;evaluation:Evaluation|null;status:Health};
+export type Grid = {elevations:(number|null)[][];bounds:number[];resolution:number[];shape:number[];dataset_id:string};

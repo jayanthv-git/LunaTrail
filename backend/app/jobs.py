@@ -5,6 +5,11 @@ from sqlalchemy import select
 from .db import Job, Evaluation, session
 pool=ThreadPoolExecutor(max_workers=1,thread_name_prefix='lunatrail')
 slots=BoundedSemaphore(3)
+def start():
+    global pool, slots
+    pool=ThreadPoolExecutor(max_workers=1,thread_name_prefix="lunatrail")
+    slots=BoundedSemaphore(3)
+
 def recover():
     with session() as s:
         for job in s.scalars(select(Job)):

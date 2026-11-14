@@ -13,7 +13,7 @@ from .config import settings
 
 @asynccontextmanager
 async def lifespan(app):
-    db.migrate(); indexing.initialize(); jobs.recover()
+    db.migrate(); indexing.initialize(); jobs.start(); jobs.recover()
     yield
     jobs.pool.shutdown(wait=True)
 app=FastAPI(title='LunaTrail local DEM simulation',version='1.0',lifespan=lifespan)
@@ -26,8 +26,9 @@ class BodyLimit:
             msg=await receive()
             if msg['type']=='http.disconnect': return
             size+=len(msg.get('body',b'')); chunks.append(msg.get('body',b''))
-            if size>65536:
-                return await JSONResponse({'error':{'message':'Request exceeds 64 KiB'}},413)(scope,receive,send)
+            limit=32*1024*1024 if scope.get('path')=='/api/datasets/upload' else 65536
+            if size>limit:
+                return await JSONResponse({'error':{'message':f'Request exceeds {limit} bytes'}},413)(scope,receive,send)
             if not msg.get('more_body'): break
         async def replay(): return {'type':'http.request','body':b''.join(chunks),'more_body':False}
         await self.app(scope,replay,send)
@@ -125,3 +126,7 @@ def export_experiment(id:str):
     with db.session() as s: run=s.scalar(select(db.Localization).where(db.Localization.experiment_id==id))
     if not run: raise ValueError('Complete localization first')
     return {'observation':experiments.observation(id),'result':experiments.hydrate(run.result)}
+
+# Retain all v1 endpoints; add shared mission-control resources.
+from .mission import router as mission_router
+app.include_router(mission_router)

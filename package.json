@@ -11,20 +11,23 @@
     "setup": "sh scripts/setup.sh",
     "prepare:terrain": "PYTHONPATH=backend backend/.venv/bin/python -m app.cli prepare",
     "test:backend": "PYTHONPATH=backend backend/.venv/bin/python -m pytest backend/tests -q",
-    "benchmark": "PYTHONPATH=backend backend/.venv/bin/python -m app.cli benchmark"
+    "benchmark": "PYTHONPATH=backend backend/.venv/bin/python -m app.cli benchmark",
+    "typecheck": "tsc --noEmit",
+    "verify:lifecycle": "python3 scripts/verify_lifecycle.py"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
+    "lucide-react": "^0.468.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "gsap": "^3.13.0",
-    "lucide-react": "^0.468.0"
+    "react-router": "^7.18.4"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
-    "tailwindcss": "^4.1.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.4.0",
+    "tailwindcss": "^4.1.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.0"
   }

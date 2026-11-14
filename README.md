@@ -1,3 +1,7 @@
+# Current eight-page mission dashboard
+
+See [the verified continuation handover](docs/HANDOVER.md) for current routes, demo steps, test results and known limits. The research/benchmark details below also describe the retained legacy API.
+
 # LunaTrail local DEM research demonstration
 
 A complete local FastAPI + SQLite backend connected to the existing React cinematic frontend. Real NASA LOLA terrain → rendered references → hidden held-out observation → position and heading estimate → explicit truth reveal → measured errors. This uses simulated observations from the same DEM, **not real camera photographs**.
@@ -7,13 +11,13 @@ A complete local FastAPI + SQLite backend connected to the existing React cinema
 Tested on this Apple Silicon Mac with Python 3.14.6 (Rasterio 1.5.2 binary wheel), Node 24, and pinned Python dependencies. No Docker or cloud account needed.
 
 ```sh
-cd "/Users/jayanthv/Desktop/lunatrail 2"
+cd LunaTrail
 npm run setup
 npm run prepare:terrain
 npm run dev:all
 ```
 
-Open http://127.0.0.1:5173/#system. API documentation: http://127.0.0.1:8000/docs. Both services bind to loopback. Ctrl+C stops both process groups; active background work is given 30 seconds to finish before termination. Do not run multiple backend workers against the same state directory. Vite proxies `/api` to port 8000; no broad CORS is enabled. `npm run dev` starts only the frontend.
+Open http://127.0.0.1:5173/ for the cinematic landing, then ENTER LUNATRAIL for `/dashboard`. API documentation: http://127.0.0.1:8000/docs. Both services bind to loopback. Ctrl+C stops both process groups; active background work is given 30 seconds to finish before termination. Do not run multiple backend workers against the same state directory. Vite proxies `/api` to port 8000; no broad CORS is enabled. `npm run dev` starts only the frontend.
 
 Setup and preparation are repeatable: migrations are applied and the same DEM/configuration reuses the existing dataset and index. `.env.example` documents optional settings; copy it to `.env` to customize. Environment paths resolve against the project root, including spaces.
 
@@ -21,7 +25,7 @@ Click Build / reuse index → New hidden experiment → Run localization → Rev
 
 ## Geometry and data
 
-The processed crop and source documentation are included. The original 180 MB source GeoTIFF remains in the local working folder and is omitted from GitHub because it exceeds GitHub’s standard 100 MB file limit. The backend starts and runs the default crop without that source file. To use full-source mode, supply the original file at `data/source/LDEM_80S_80MPP_ADJ.TIF` and set `LUNATRAIL_DEM` accordingly. Both raster headers are validated, including CRS, scale, offset, NoData, transform, bounds and resolution. The source is 7600×7600; the default crop is 256×256 with all 65,536 pixels valid. Pixel centers span −10,200 to +10,200 m; outer pixel edges are −10,240 to +10,240 m. Preview bounds use outer pixel edges for exact raster/overlay alignment.
+The processed crop and source documentation are included. The original 180 MB source GeoTIFF is omitted from GitHub; the default crop works without it. For full-source mode, download the NASA DEM linked in `data/README.md` to `data/source/LDEM_80S_80MPP_ADJ.TIF` and set `LUNATRAIL_DEM` accordingly. Both raster headers are validated, including CRS, scale, offset, NoData, transform, bounds and resolution. The source is 7600×7600; the default crop is 256×256 with all 65,536 pixels valid. Pixel centers span −10,200 to +10,200 m; outer pixel edges are −10,240 to +10,240 m. Preview bounds use outer pixel edges for exact raster/overlay alignment.
 
 Computations use the embedded lunar south polar stereographic x/y meters. PyProj converts to the raster's own lunar geodetic CRS for display; there is no Earth EPSG conversion. Radius is 1,737,400 m from the CRS. Elevations are meters as specified by the saved NASA product documentation. The active raster is SHA-256 fingerprinted. A source file selected through `LUNATRAIL_DEM` is read as a central 256×256 window, avoiding a full-band allocation; this MVP intentionally keeps its search region bounded. Expanding or choosing another full-source region is not exposed in the UI.
 
@@ -91,7 +95,7 @@ Browser verification also ran the default seed 42 unknown-heading clean experime
 - Stale or corrupted cache: stop both services, move only generated state aside and prepare again. This resets experiments too. Preserve it if you need past results:
 
 ```sh
-cd "/Users/jayanthv/Desktop/lunatrail 2"
+cd LunaTrail
 mv backend/var "backend/var-backup-$(date +%Y%m%d-%H%M%S)"
 npm run prepare:terrain
 npm run dev:all
