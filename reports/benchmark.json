@@ -1,0 +1,890 @@
+[
+  {
+    "id": "7fb630ebbd6a4b13a73b2a283bde3a04",
+    "status": "complete",
+    "parameters": {
+      "index_id": "5d42007dd4e9b1104ca188dde3b36040d6f46a68d486e2ed9eadc973150a191b",
+      "seed": 20261113,
+      "mode": "known",
+      "noise": 0.0,
+      "trials": 20
+    },
+    "trials": [
+      {
+        "trial": 0,
+        "experiment_id": "a63e7593f4bf4645b333710d8fd0a6a0",
+        "position_error_m": 314.09429786028363,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 314.09429786028363,
+        "runtime_ms": 0.846791997901164,
+        "error": null
+      },
+      {
+        "trial": 1,
+        "experiment_id": "3beeed4a13c04fd3b0e404a9596370d7",
+        "position_error_m": 292.7500890514572,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 292.7500890514572,
+        "runtime_ms": 0.5534590018214658,
+        "error": null
+      },
+      {
+        "trial": 2,
+        "experiment_id": "99ec6552bd63463a8b591f1fa1902d90",
+        "position_error_m": 525.2317164422687,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 229.72007221148917,
+        "runtime_ms": 0.5108749974169768,
+        "error": null
+      },
+      {
+        "trial": 3,
+        "experiment_id": "88bd29ee7fb2446090cc71185b826e02",
+        "position_error_m": 150.63791862330515,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 150.63791862330515,
+        "runtime_ms": 0.48512500143260695,
+        "error": null
+      },
+      {
+        "trial": 4,
+        "experiment_id": "0b5d83ea4bcb48c685afa46f82158c17",
+        "position_error_m": 492.3980054145921,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 361.3757839385582,
+        "runtime_ms": 0.4587500006891787,
+        "error": null
+      },
+      {
+        "trial": 5,
+        "experiment_id": "e22b037ed9684ec7812c8fa65d88b99a",
+        "position_error_m": 343.7473736469644,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 297.5787956976966,
+        "runtime_ms": 0.44420800259104,
+        "error": null
+      },
+      {
+        "trial": 6,
+        "experiment_id": "c779c5f4dcef41f7b06ad65c02122ad7",
+        "position_error_m": 278.2168703096635,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 278.2168703096635,
+        "runtime_ms": 0.44749999869964086,
+        "error": null
+      },
+      {
+        "trial": 7,
+        "experiment_id": "8a7229b939d049beba34dab85124a9e7",
+        "position_error_m": 188.37429506561878,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 188.37429506561878,
+        "runtime_ms": 0.5382499984989408,
+        "error": null
+      },
+      {
+        "trial": 8,
+        "experiment_id": "0af046079f4643c498741bddbd0c7fbb",
+        "position_error_m": 460.4714971799197,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 286.27727526651984,
+        "runtime_ms": 0.43804199958685786,
+        "error": null
+      },
+      {
+        "trial": 9,
+        "experiment_id": "b4fc16b532bc4ac5902d78d8f13b8dd4",
+        "position_error_m": 73.75614043412625,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 73.75614043412624,
+        "runtime_ms": 0.455000001238659,
+        "error": null
+      },
+      {
+        "trial": 10,
+        "experiment_id": "ab7f2cf25e434774a35fad247c544324",
+        "position_error_m": 280.9307444681186,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 280.9307444681186,
+        "runtime_ms": 0.4619589999492746,
+        "error": null
+      },
+      {
+        "trial": 11,
+        "experiment_id": "68454bd824a34fada2854012a7c8126e",
+        "position_error_m": 573.8532534355978,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 332.2454362575901,
+        "runtime_ms": 0.4506250006670598,
+        "error": null
+      },
+      {
+        "trial": 12,
+        "experiment_id": "1ea8902d1d144d599cda545d5543bed3",
+        "position_error_m": 195.47036806757194,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 195.47036806757194,
+        "runtime_ms": 0.4398749988467898,
+        "error": null
+      },
+      {
+        "trial": 13,
+        "experiment_id": "cc50aa1053774eb09422080b384ee61c",
+        "position_error_m": 383.448083447879,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 383.448083447879,
+        "runtime_ms": 0.4437080024217721,
+        "error": null
+      },
+      {
+        "trial": 14,
+        "experiment_id": "39c3a2a3d3c846218576bb781751b3df",
+        "position_error_m": 116.62885744499147,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 116.62885744499147,
+        "runtime_ms": 0.4738749994430691,
+        "error": null
+      },
+      {
+        "trial": 15,
+        "experiment_id": "1373877fc64f4935b2fc85607e2d080f",
+        "position_error_m": 277.61930857255527,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 277.61930857255527,
+        "runtime_ms": 0.5047920021752361,
+        "error": null
+      },
+      {
+        "trial": 16,
+        "experiment_id": "2d2ee1e82e304465b06964573e74c453",
+        "position_error_m": 739.7963935187778,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 188.0318577614334,
+        "runtime_ms": 0.44308300130069256,
+        "error": null
+      },
+      {
+        "trial": 17,
+        "experiment_id": "88a86079b9114d818c47ac449040e264",
+        "position_error_m": 255.51848960748808,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 255.51848960748808,
+        "runtime_ms": 0.45991599836270325,
+        "error": null
+      },
+      {
+        "trial": 18,
+        "experiment_id": "61384381ebaa4bed9c0fa71564f74ba8",
+        "position_error_m": 303.01312857394754,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 303.01312857394754,
+        "runtime_ms": 0.43562499922700226,
+        "error": null
+      },
+      {
+        "trial": 19,
+        "experiment_id": "e2e9319ae68d43a6a29ebf144dd08b01",
+        "position_error_m": 501.6045407399361,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 316.78478865394345,
+        "runtime_ms": 0.4534999970928766,
+        "error": null
+      }
+    ],
+    "failed": 0,
+    "position_m": {
+      "mean": 337.3780685952531,
+      "median": 297.8816088127024,
+      "p90": 530.0938701416018
+    },
+    "heading_deg": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p90": 0.0
+    },
+    "runtime_ms": {
+      "mean": 0.48724794996815035,
+      "median": 0.45687500096391886,
+      "p90": 0.5397708988311933
+    },
+    "nearest_candidate_m": {
+      "mean": 256.12363006571184,
+      "median": 279.57380738889105,
+      "p90": 335.15847102568694
+    },
+    "candidate_spacing_m": 640,
+    "success_rates": {
+      "100": 0.05,
+      "320": 0.6,
+      "640": 0.95,
+      "1000": 1.0
+    },
+    "limitation": "Shared-DEM simulated observations are an optimistic benchmark; this does not validate real camera performance. Grid discretization, 80 m terrain, finite horizon and ideal camera geometry limit results."
+  },
+  {
+    "id": "a083cb98d72148bc963ac4344eeaf305",
+    "status": "complete",
+    "parameters": {
+      "index_id": "5d42007dd4e9b1104ca188dde3b36040d6f46a68d486e2ed9eadc973150a191b",
+      "seed": 20261113,
+      "mode": "known",
+      "noise": 0.1,
+      "trials": 20
+    },
+    "trials": [
+      {
+        "trial": 0,
+        "experiment_id": "ca39d2dc60d44c828ae0767b04ad6e23",
+        "position_error_m": 314.09429786028363,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 314.09429786028363,
+        "runtime_ms": 0.4522500021266751,
+        "error": null
+      },
+      {
+        "trial": 1,
+        "experiment_id": "799517fe88624dbea43cdb337e5ea114",
+        "position_error_m": 292.7500890514572,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 292.7500890514572,
+        "runtime_ms": 0.4550830017251428,
+        "error": null
+      },
+      {
+        "trial": 2,
+        "experiment_id": "58bd8d14b5e5498abb004b0131e23098",
+        "position_error_m": 525.2317164422687,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 229.72007221148917,
+        "runtime_ms": 0.4560000015771948,
+        "error": null
+      },
+      {
+        "trial": 3,
+        "experiment_id": "6e6933cc5d12441aa9d036a40edf6d12",
+        "position_error_m": 150.63791862330515,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 150.63791862330515,
+        "runtime_ms": 0.47825000001466833,
+        "error": null
+      },
+      {
+        "trial": 4,
+        "experiment_id": "28dcd01a5ac348e482b5100c3eaa4f98",
+        "position_error_m": 492.3980054145921,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 361.3757839385582,
+        "runtime_ms": 0.5007500003557652,
+        "error": null
+      },
+      {
+        "trial": 5,
+        "experiment_id": "e957bd8ee2164329ab27ce9e7940263f",
+        "position_error_m": 343.7473736469644,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 297.5787956976966,
+        "runtime_ms": 0.4632500022125896,
+        "error": null
+      },
+      {
+        "trial": 6,
+        "experiment_id": "a6687cdea83144cba65e168a106ebd87",
+        "position_error_m": 278.2168703096635,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 278.2168703096635,
+        "runtime_ms": 0.46474999908241443,
+        "error": null
+      },
+      {
+        "trial": 7,
+        "experiment_id": "f9703fe4163d410581823c6ab57d2aa5",
+        "position_error_m": 188.37429506561878,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 188.37429506561878,
+        "runtime_ms": 0.500833000842249,
+        "error": null
+      },
+      {
+        "trial": 8,
+        "experiment_id": "180a5b6a35c04bd39dcf0c225436fe78",
+        "position_error_m": 460.4714971799197,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 286.27727526651984,
+        "runtime_ms": 0.5108330005896278,
+        "error": null
+      },
+      {
+        "trial": 9,
+        "experiment_id": "90b35eb13d6041e694db333f33983525",
+        "position_error_m": 73.75614043412625,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 73.75614043412624,
+        "runtime_ms": 0.5195420017116703,
+        "error": null
+      },
+      {
+        "trial": 10,
+        "experiment_id": "5ac85ba434bc4508b2cfe6d74ee42a9f",
+        "position_error_m": 280.9307444681186,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 280.9307444681186,
+        "runtime_ms": 0.4922090010950342,
+        "error": null
+      },
+      {
+        "trial": 11,
+        "experiment_id": "0c003e7ba00f4cf294448c7e2c9b0d3b",
+        "position_error_m": 573.8532534355978,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 332.2454362575901,
+        "runtime_ms": 0.5230419992585666,
+        "error": null
+      },
+      {
+        "trial": 12,
+        "experiment_id": "c326b62ecb8c4ceeb3171d2660637e62",
+        "position_error_m": 195.47036806757194,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 195.47036806757194,
+        "runtime_ms": 0.5131249999976717,
+        "error": null
+      },
+      {
+        "trial": 13,
+        "experiment_id": "7f2bd90e732b4c288846d930007a6f64",
+        "position_error_m": 383.448083447879,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 383.448083447879,
+        "runtime_ms": 0.5038749986852054,
+        "error": null
+      },
+      {
+        "trial": 14,
+        "experiment_id": "4491c2e6275348f38e3fdfa25fefe6b2",
+        "position_error_m": 116.62885744499147,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 116.62885744499147,
+        "runtime_ms": 0.5005000020901207,
+        "error": null
+      },
+      {
+        "trial": 15,
+        "experiment_id": "e75e4efa6546470c98419b8fc436c945",
+        "position_error_m": 277.61930857255527,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 277.61930857255527,
+        "runtime_ms": 0.525125000422122,
+        "error": null
+      },
+      {
+        "trial": 16,
+        "experiment_id": "c6a622c9a4984749a65eb658a432dd7b",
+        "position_error_m": 739.7963935187778,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 188.0318577614334,
+        "runtime_ms": 0.44470799912232906,
+        "error": null
+      },
+      {
+        "trial": 17,
+        "experiment_id": "7a69d4ac38ec4f9c8b78c59fe0fa6f9e",
+        "position_error_m": 255.51848960748808,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 255.51848960748808,
+        "runtime_ms": 0.43287500011501834,
+        "error": null
+      },
+      {
+        "trial": 18,
+        "experiment_id": "bba04ffad515418d8553b254a46cc76e",
+        "position_error_m": 303.01312857394754,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 303.01312857394754,
+        "runtime_ms": 0.4576249993988313,
+        "error": null
+      },
+      {
+        "trial": 19,
+        "experiment_id": "b196668ed5dc4256939bb256b02b3488",
+        "position_error_m": 501.6045407399361,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 316.78478865394345,
+        "runtime_ms": 0.44783400153391995,
+        "error": null
+      }
+    ],
+    "failed": 0,
+    "position_m": {
+      "mean": 337.3780685952531,
+      "median": 297.8816088127024,
+      "p90": 530.0938701416018
+    },
+    "heading_deg": {
+      "mean": 0.0,
+      "median": 0.0,
+      "p90": 0.0
+    },
+    "runtime_ms": {
+      "mean": 0.4821229505978408,
+      "median": 0.48522950055485126,
+      "p90": 0.5198920014663599
+    },
+    "nearest_candidate_m": {
+      "mean": 256.12363006571184,
+      "median": 279.57380738889105,
+      "p90": 335.15847102568694
+    },
+    "candidate_spacing_m": 640,
+    "success_rates": {
+      "100": 0.05,
+      "320": 0.6,
+      "640": 0.95,
+      "1000": 1.0
+    },
+    "limitation": "Shared-DEM simulated observations are an optimistic benchmark; this does not validate real camera performance. Grid discretization, 80 m terrain, finite horizon and ideal camera geometry limit results."
+  },
+  {
+    "id": "35846773595747008557016bc308e7e9",
+    "status": "complete",
+    "parameters": {
+      "index_id": "5d42007dd4e9b1104ca188dde3b36040d6f46a68d486e2ed9eadc973150a191b",
+      "seed": 20261113,
+      "mode": "unknown",
+      "noise": 0.0,
+      "trials": 20
+    },
+    "trials": [
+      {
+        "trial": 0,
+        "experiment_id": "d89d1994e05a4adf914b831dd357e6dc",
+        "position_error_m": 314.09429786028363,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 314.09429786028363,
+        "runtime_ms": 5.49825000052806,
+        "error": null
+      },
+      {
+        "trial": 1,
+        "experiment_id": "e4fa3277c71d4b3a8d53ddd24d60c090",
+        "position_error_m": 292.7500890514572,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 292.7500890514572,
+        "runtime_ms": 1.3977500020700973,
+        "error": null
+      },
+      {
+        "trial": 2,
+        "experiment_id": "3b0e2b20c06846e38b0df3dea102406e",
+        "position_error_m": 525.2317164422687,
+        "heading_error_deg": 3.0,
+        "nearest_candidate_m": 229.72007221148917,
+        "runtime_ms": 1.389832999848295,
+        "error": null
+      },
+      {
+        "trial": 3,
+        "experiment_id": "91fc3d6adfdf488c876acdd86f02bdf1",
+        "position_error_m": 150.63791862330515,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 150.63791862330515,
+        "runtime_ms": 1.4496660005534068,
+        "error": null
+      },
+      {
+        "trial": 4,
+        "experiment_id": "0943abde1e22404bb8aeb222e96c034f",
+        "position_error_m": 492.3980054145921,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 361.3757839385582,
+        "runtime_ms": 1.3969579995318782,
+        "error": null
+      },
+      {
+        "trial": 5,
+        "experiment_id": "293984c2489b4f0288bdc89d756ef19c",
+        "position_error_m": 343.7473736469644,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 297.5787956976966,
+        "runtime_ms": 1.397500000166474,
+        "error": null
+      },
+      {
+        "trial": 6,
+        "experiment_id": "8b300a7299ab418db7ff38b0976de1fc",
+        "position_error_m": 278.2168703096635,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 278.2168703096635,
+        "runtime_ms": 1.7162910007755272,
+        "error": null
+      },
+      {
+        "trial": 7,
+        "experiment_id": "9a7fbc16eb7a483897769bdd11d755a1",
+        "position_error_m": 604.3892962912444,
+        "heading_error_deg": 6.0,
+        "nearest_candidate_m": 188.37429506561878,
+        "runtime_ms": 1.454958000977058,
+        "error": null
+      },
+      {
+        "trial": 8,
+        "experiment_id": "ad454c3d3d9a4fd69e4081a584b1624b",
+        "position_error_m": 460.4714971799197,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 286.27727526651984,
+        "runtime_ms": 1.3832910008204635,
+        "error": null
+      },
+      {
+        "trial": 9,
+        "experiment_id": "43a16502fabe45a8a8a5dbd04f8dfe80",
+        "position_error_m": 73.75614043412625,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 73.75614043412624,
+        "runtime_ms": 1.4123750006547198,
+        "error": null
+      },
+      {
+        "trial": 10,
+        "experiment_id": "1b31ee1630cd4539856a49eba79a3117",
+        "position_error_m": 280.9307444681186,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 280.9307444681186,
+        "runtime_ms": 1.3991250016260892,
+        "error": null
+      },
+      {
+        "trial": 11,
+        "experiment_id": "767d7b4718814399984fa69305f42966",
+        "position_error_m": 573.8532534355978,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 332.2454362575901,
+        "runtime_ms": 1.4587919977202546,
+        "error": null
+      },
+      {
+        "trial": 12,
+        "experiment_id": "15ac9420d36e4da4bebd695483d740c9",
+        "position_error_m": 467.61907808513956,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 195.47036806757194,
+        "runtime_ms": 1.414917001966387,
+        "error": null
+      },
+      {
+        "trial": 13,
+        "experiment_id": "58199e66e438405bad97042d31b50bc6",
+        "position_error_m": 1065.3512789045983,
+        "heading_error_deg": 20.0,
+        "nearest_candidate_m": 383.448083447879,
+        "runtime_ms": 1.514250001491746,
+        "error": null
+      },
+      {
+        "trial": 14,
+        "experiment_id": "efd15562862a4cc7b9c445b17534a53a",
+        "position_error_m": 116.62885744499147,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 116.62885744499147,
+        "runtime_ms": 1.5623750005033799,
+        "error": null
+      },
+      {
+        "trial": 15,
+        "experiment_id": "ed7553e625e640a09bded99b3bf932fa",
+        "position_error_m": 277.61930857255527,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 277.61930857255527,
+        "runtime_ms": 1.5364170030807145,
+        "error": null
+      },
+      {
+        "trial": 16,
+        "experiment_id": "2d11c4356b8c40e0b2ceacb4a05fc4c2",
+        "position_error_m": 739.7963935187778,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 188.0318577614334,
+        "runtime_ms": 1.3591659990197513,
+        "error": null
+      },
+      {
+        "trial": 17,
+        "experiment_id": "a37b27dffadb44c68b401e7fcc7dd571",
+        "position_error_m": 516.8633436224299,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 255.51848960748808,
+        "runtime_ms": 1.3429589998850133,
+        "error": null
+      },
+      {
+        "trial": 18,
+        "experiment_id": "3725bc801f784747961d307f34c7e74e",
+        "position_error_m": 303.01312857394754,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 303.01312857394754,
+        "runtime_ms": 1.3610830028483178,
+        "error": null
+      },
+      {
+        "trial": 19,
+        "experiment_id": "1a08c968b30f4c0c9d9c9f7d9baad300",
+        "position_error_m": 501.6045407399361,
+        "heading_error_deg": 6.0,
+        "nearest_candidate_m": 316.78478865394345,
+        "runtime_ms": 1.366999997117091,
+        "error": null
+      }
+    ],
+    "failed": 0,
+    "position_m": {
+      "mean": 418.9486566309959,
+      "median": 402.10943541344204,
+      "p90": 617.9300060139979
+    },
+    "heading_deg": {
+      "mean": 3.2,
+      "median": 2.0,
+      "p90": 6.0
+    },
+    "runtime_ms": {
+      "mean": 1.6406478005592362,
+      "median": 1.4057500011404045,
+      "p90": 1.5777666005305948
+    },
+    "nearest_candidate_m": {
+      "mean": 256.12363006571184,
+      "median": 279.57380738889105,
+      "p90": 335.15847102568694
+    },
+    "candidate_spacing_m": 640,
+    "success_rates": {
+      "100": 0.05,
+      "320": 0.45,
+      "640": 0.9,
+      "1000": 0.95
+    },
+    "limitation": "Shared-DEM simulated observations are an optimistic benchmark; this does not validate real camera performance. Grid discretization, 80 m terrain, finite horizon and ideal camera geometry limit results."
+  },
+  {
+    "id": "46d6b3e47ac34418a87777eb25d86852",
+    "status": "complete",
+    "parameters": {
+      "index_id": "5d42007dd4e9b1104ca188dde3b36040d6f46a68d486e2ed9eadc973150a191b",
+      "seed": 20261113,
+      "mode": "unknown",
+      "noise": 0.1,
+      "trials": 20
+    },
+    "trials": [
+      {
+        "trial": 0,
+        "experiment_id": "3141a3785fca45b09a04236d4021d027",
+        "position_error_m": 314.09429786028363,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 314.09429786028363,
+        "runtime_ms": 1.3471249985741451,
+        "error": null
+      },
+      {
+        "trial": 1,
+        "experiment_id": "f96f80ba4f34471c9bb7424fdc3b89be",
+        "position_error_m": 292.7500890514572,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 292.7500890514572,
+        "runtime_ms": 1.3662499986821786,
+        "error": null
+      },
+      {
+        "trial": 2,
+        "experiment_id": "0dafeea35ea241b3ba9a56894eee8ae5",
+        "position_error_m": 525.2317164422687,
+        "heading_error_deg": 3.0,
+        "nearest_candidate_m": 229.72007221148917,
+        "runtime_ms": 1.3194999992265366,
+        "error": null
+      },
+      {
+        "trial": 3,
+        "experiment_id": "77b60bbeb28345bbb50089624466676d",
+        "position_error_m": 150.63791862330515,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 150.63791862330515,
+        "runtime_ms": 1.3195839965192135,
+        "error": null
+      },
+      {
+        "trial": 4,
+        "experiment_id": "73c6f338a27345f488f1cbf0f41dd80b",
+        "position_error_m": 492.3980054145921,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 361.3757839385582,
+        "runtime_ms": 1.3775840016023722,
+        "error": null
+      },
+      {
+        "trial": 5,
+        "experiment_id": "ac80fa903737428eafcee5a47d685bb8",
+        "position_error_m": 343.7473736469644,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 297.5787956976966,
+        "runtime_ms": 1.305833000515122,
+        "error": null
+      },
+      {
+        "trial": 6,
+        "experiment_id": "a99c27e1cbdd4160abebee74d3812204",
+        "position_error_m": 278.2168703096635,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 278.2168703096635,
+        "runtime_ms": 1.322916999924928,
+        "error": null
+      },
+      {
+        "trial": 7,
+        "experiment_id": "48aa4b7b202848b99fe5c76d4d34e9b5",
+        "position_error_m": 604.3892962912444,
+        "heading_error_deg": 6.0,
+        "nearest_candidate_m": 188.37429506561878,
+        "runtime_ms": 1.2924999973620288,
+        "error": null
+      },
+      {
+        "trial": 8,
+        "experiment_id": "8ee03f9416a140e2a01b082b118f7960",
+        "position_error_m": 460.4714971799197,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 286.27727526651984,
+        "runtime_ms": 1.2741659993480425,
+        "error": null
+      },
+      {
+        "trial": 9,
+        "experiment_id": "5d7847b32e944f83ade9f3d3ed20b0e7",
+        "position_error_m": 73.75614043412625,
+        "heading_error_deg": 1.0,
+        "nearest_candidate_m": 73.75614043412624,
+        "runtime_ms": 1.2899169996671844,
+        "error": null
+      },
+      {
+        "trial": 10,
+        "experiment_id": "1196888f888c4bf5a9b0a45e8661cfdc",
+        "position_error_m": 280.9307444681186,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 280.9307444681186,
+        "runtime_ms": 1.2783339989255182,
+        "error": null
+      },
+      {
+        "trial": 11,
+        "experiment_id": "560eda802f2c4c959ee3f1a00575512f",
+        "position_error_m": 573.8532534355978,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 332.2454362575901,
+        "runtime_ms": 1.3303329978953116,
+        "error": null
+      },
+      {
+        "trial": 12,
+        "experiment_id": "f07cd8ccd8ca4f3c94738641996c2952",
+        "position_error_m": 467.61907808513956,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 195.47036806757194,
+        "runtime_ms": 1.3760420006292406,
+        "error": null
+      },
+      {
+        "trial": 13,
+        "experiment_id": "cf907d9924e240a88b7a1d06411b188c",
+        "position_error_m": 1065.3512789045983,
+        "heading_error_deg": 20.0,
+        "nearest_candidate_m": 383.448083447879,
+        "runtime_ms": 1.291874999878928,
+        "error": null
+      },
+      {
+        "trial": 14,
+        "experiment_id": "7bc20c136e174c11b889198be6d409e2",
+        "position_error_m": 116.62885744499147,
+        "heading_error_deg": 0.0,
+        "nearest_candidate_m": 116.62885744499147,
+        "runtime_ms": 1.3340420009626541,
+        "error": null
+      },
+      {
+        "trial": 15,
+        "experiment_id": "17aaba8ce196453ca8f8a66ce4da8958",
+        "position_error_m": 277.61930857255527,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 277.61930857255527,
+        "runtime_ms": 1.3382910001382697,
+        "error": null
+      },
+      {
+        "trial": 16,
+        "experiment_id": "9b0d1e9053144cb5a22d024f630b3c51",
+        "position_error_m": 739.7963935187778,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 188.0318577614334,
+        "runtime_ms": 1.3621250000142027,
+        "error": null
+      },
+      {
+        "trial": 17,
+        "experiment_id": "2e3496f1f02e4361a6d7650e7ce814dc",
+        "position_error_m": 516.8633436224299,
+        "heading_error_deg": 4.0,
+        "nearest_candidate_m": 255.51848960748808,
+        "runtime_ms": 1.3016670018259902,
+        "error": null
+      },
+      {
+        "trial": 18,
+        "experiment_id": "b2bb335e0a2743d0a84ead4ccb5e31fd",
+        "position_error_m": 303.01312857394754,
+        "heading_error_deg": 2.0,
+        "nearest_candidate_m": 303.01312857394754,
+        "runtime_ms": 1.27937499928521,
+        "error": null
+      },
+      {
+        "trial": 19,
+        "experiment_id": "8be2eea85d2640c0bfa401f1e7c086f6",
+        "position_error_m": 501.6045407399361,
+        "heading_error_deg": 6.0,
+        "nearest_candidate_m": 316.78478865394345,
+        "runtime_ms": 1.7655410010775086,
+        "error": null
+      }
+    ],
+    "failed": 0,
+    "position_m": {
+      "mean": 418.9486566309959,
+      "median": 402.10943541344204,
+      "p90": 617.9300060139979
+    },
+    "heading_deg": {
+      "mean": 3.2,
+      "median": 2.0,
+      "p90": 6.0
+    },
+    "runtime_ms": {
+      "mean": 1.3436500496027293,
+      "median": 1.3212504982220707,
+      "p90": 1.3761962007265538
+    },
+    "nearest_candidate_m": {
+      "mean": 256.12363006571184,
+      "median": 279.57380738889105,
+      "p90": 335.15847102568694
+    },
+    "candidate_spacing_m": 640,
+    "success_rates": {
+      "100": 0.05,
+      "320": 0.45,
+      "640": 0.9,
+      "1000": 0.95
+    },
+    "limitation": "Shared-DEM simulated observations are an optimistic benchmark; this does not validate real camera performance. Grid discretization, 80 m terrain, finite horizon and ideal camera geometry limit results."
+  }
+]

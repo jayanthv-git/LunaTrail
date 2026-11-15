@@ -1,0 +1,16 @@
+LUNATRAIL VIDEO VERSION
+
+1. Extract the ZIP.
+2. Install Node.js 24 LTS from https://nodejs.org
+3. Open a terminal in the extracted lunatrail folder.
+4. Run: npm ci
+5. Run: npm run dev
+6. Open the local URL printed in the terminal.
+
+Do not open index.html directly.
+
+Build for deployment: npm run build
+Run tests: npm test
+
+Includes optimized desktop/mobile video and source code.
+No Git remotes, hosting identity, secrets, or node_modules are included.

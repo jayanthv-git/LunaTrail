@@ -1,0 +1,88 @@
+{
+  "source_filename": "LDEM_80S_80MPP_ADJ.TIF",
+  "source_url": "https://pgda.gsfc.nasa.gov/products/90",
+  "download_url": "https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_80MPP_ADJ.TIF",
+  "download_date": "2026-11-13",
+  "source_bytes": 189158392,
+  "sha256": "82030dcbdd7c4bb0c7d858e9b4b293b9f2cda5a543ba31ec0f42784bd6beee5a",
+  "width": 7600,
+  "height": 7600,
+  "band_count": 1,
+  "dtype": [
+    "float32"
+  ],
+  "resolution_m": [
+    80.0,
+    80.0
+  ],
+  "bounds": [
+    -304000.0,
+    -304000.0,
+    304000.0,
+    304000.0
+  ],
+  "crs_wkt": "PROJCS[\"Moon (2015) - Sphere / Ocentric / South Polar\",GEOGCS[\"Moon (2015) - Sphere / Ocentric\",DATUM[\"Moon (2015) - Sphere\",SPHEROID[\"Moon (2015) - Sphere\",1737400,0,AUTHORITY[\"IAU\",\"30100\"]],AUTHORITY[\"IAU\",\"30100\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"30100\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"IAU\",\"30100\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"IAU\",\"30135\"]]",
+  "transform": [
+    80.0,
+    0.0,
+    -304000.0,
+    0.0,
+    -80.0,
+    304000.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "nodata": NaN,
+  "scales": [
+    1.0
+  ],
+  "offsets": [
+    0.0
+  ],
+  "tags": {
+    "NC_GLOBAL#Conventions": "CF-1.7",
+    "NC_GLOBAL#description": "Mean value per bin",
+    "NC_GLOBAL#GMT_version": "6.5.0_2402709_2023.01.09 [64-bit]",
+    "NC_GLOBAL#history": "gmt grdmath ldem_80s_final_adj_80mpp_surf.grd 1000.0 MUL = test.grd",
+    "NC_GLOBAL#node_offset": "1",
+    "NC_GLOBAL#title": "Produced by grdmath",
+    "x#actual_range": "{-304,304}",
+    "x#axis": "X",
+    "x#long_name": "x",
+    "y#actual_range": "{-304,304}",
+    "y#axis": "Y",
+    "y#long_name": "y",
+    "z#actual_range": "{-7295.51708984375,7026.3310546875}",
+    "z#long_name": "z",
+    "z#_FillValue": "nan",
+    "AREA_OR_POINT": "Area"
+  },
+  "reference_frame": "MOON_ME / JPL DE421 (NASA product documentation)",
+  "elevation_units": "meters (NASA product documentation)",
+  "crop": {
+    "filename": "LDEM_80S_80MPP_ADJ_crop_20480m.tif",
+    "window_col_row_width_height": [
+      3672,
+      3672,
+      256,
+      256
+    ],
+    "width": 256,
+    "height": 256,
+    "extent_m": [
+      20480,
+      20480
+    ],
+    "selection": "Highest terrain variation among 25 fully valid central candidate windows; no resampling",
+    "bounds": [
+      -10240.0,
+      -10240.0,
+      10240.0,
+      10240.0
+    ],
+    "elevation_min": -2868.79736328125,
+    "elevation_max": 1736.757080078125,
+    "valid_pixels": 65536
+  }
+}
